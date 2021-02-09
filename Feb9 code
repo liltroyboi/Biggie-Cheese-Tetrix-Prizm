@@ -1,0 +1,46 @@
+#include <PRIZM.h>
+
+PRIZM prizm;
+int mappedValue = 0; 
+int distance = 0;  
+void setup() {        
+prizm.PrizmBegin();  
+}
+
+void loop() {
+  
+distance = prizm.readSonicSensorCM(1);
+  
+if (distance <5) {
+  DangerLight();
+  RestServo();
+  }
+else if (distance >5 & distance <43) {
+  MoveServo(distance);
+}
+
+else {
+prizm.setGreenLED(1);
+delay(200);
+prizm.setGreenLED(0);    
+}
+
+
+//Function
+
+void DangerLight() {
+  prizm.setRedLED(1);
+  delay(400);
+  prizm.setRedLED(0);
+}
+
+void RestServo() {
+  prizm.setServoPosition(1,0);
+}
+
+void MoveServo(int distance) {
+  mappedValue = map(distance, 5, 43, 0, 180);
+  prizm.setServoPosition(1, mappedValue);
+  delay(150); 
+}
+
