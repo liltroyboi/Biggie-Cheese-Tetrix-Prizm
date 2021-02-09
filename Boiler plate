@@ -1,0 +1,23 @@
+#include <PRIZM.h>      // Include the PRIZM library from Tetrix
+
+ 
+
+PRIZM prizm;            // Instantiate a PRIZM object "prizm" so we can use its functions
+
+ 
+
+void setup() {          // run this code once
+
+ 
+
+prizm.PrizmBegin();   // initialize the PRIZM controller
+
+ 
+
+}
+
+ 
+
+void loop() {     // repeat this code in a loop
+  // Code Here
+}
