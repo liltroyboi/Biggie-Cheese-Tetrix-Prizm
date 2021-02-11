@@ -1,0 +1,30 @@
+#include <PRIZM.h>      
+
+ 
+
+PRIZM prizm;       
+
+ 
+
+void setup() {  
+
+ 
+
+prizm.PrizmBegin();   
+
+ 
+
+}
+
+ 
+
+void loop() {     
+  prizm.setMotorPowers(50,-50);
+  delay(1000);
+  prizm.setMotorPowers(0,0);
+  delay(400);
+  prizm.setMotorPowers(0,-50);
+  delay(800);
+  prizm.setMotorPowers(0,0);
+  delay(400);
+}
