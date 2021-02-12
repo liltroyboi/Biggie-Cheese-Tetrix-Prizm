@@ -1,0 +1,41 @@
+#include <PRIZM.h>  
+PRIZM prizm;        
+int mappedValue = 0; 
+int distance = 0;
+
+void setup() { 
+prizm.PrizmBegin();   
+}
+
+void loop() {
+  distance = prizm.readSonicSensorCM(5);
+    if(distance <75) {
+     DangerZone();
+      
+}
+    else if (distance <75 & distance >150){
+    MoveMotor();
+}
+    else {
+    prizm.setMotorPowers(50,-50);
+    delay(400);
+    prizm.setMotorPowers(0,0);
+}
+}
+
+
+void DangerZone() {
+  prizm.setMotorPowers(50,50);
+  delay(400);
+  prizm.setMotorPowers(50,-50);
+}
+
+void MoveMotor() {
+  prizm.setMotorPowers(50,50);
+  delay(1000);
+}
+
+void StopMotors() {
+  prizm.setMotorPowers(0,0);
+  delay(1000);
+}
