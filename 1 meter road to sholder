@@ -1,0 +1,50 @@
+#include <PRIZM.h>
+
+ 
+
+PRIZM prizm;           
+ 
+ 
+
+void setup() {          
+prizm.PrizmBegin(); 
+prizm.setServoPosition(1,0);  
+}
+void loop() {
+ prizm.setMotorSpeeds(500,-500);
+ delay(2800);
+ prizm.setMotorDegree(1,360,90);
+ delay(500);
+ prizm.setMotorSpeeds(360,-360);
+ delay(1800);
+ prizm.setMotorDegree(2,360,90);
+ delay(600);
+ prizm.setMotorSpeeds(360,-360);
+ delay(1000);
+ prizm.setMotorSpeeds(0,-0);
+ delay(100);
+ prizm.setServoPosition(1,90);
+ delay(400);
+ prizm.setServoPosition(1,-90);
+ delay(400);
+ prizm.setServoPosition(1,90);
+ delay(400);
+ prizm.setServoPosition(1,-90);
+ delay(400);
+ prizm.setGreenLED(HIGH);
+ delay(500);
+ prizm.setRedLED(HIGH);
+ delay(500); 
+ prizm.setRedLED(LOW);
+ delay(500);
+ prizm.setGreenLED(LOW);
+ delay(500);
+ prizm.setGreenLED(HIGH);
+ delay(500);
+ prizm.setRedLED(HIGH);
+ delay(500); 
+ prizm.setRedLED(LOW);
+ delay(500);
+ prizm.setGreenLED(LOW);
+ delay(100000);
+}
