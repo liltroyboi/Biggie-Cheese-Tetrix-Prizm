@@ -1,0 +1,79 @@
+#include <PRIZM.h> 
+  PRIZM prizm; 
+      
+
+void setup() {        
+   prizm.PrizmBegin();
+   prizm.setMotorInvert(2,1);  
+}
+
+void loop() {          
+
+     if(prizm.readLineSensor(4) == HIGH) {
+    White();
+    CurveRight();    
+}  
+
+  if(prizm.readLineSensor(4) == LOW) {
+    Black();
+    CurveLeft(); 
+}
+  delay(30);
+  
+  
+}
+
+
+
+
+
+
+
+
+void Forward (int time){
+  prizm.setMotorSpeeds(360,360);
+  delay(time);
+}
+
+void Left (int time){
+  prizm.setMotorSpeeds(360,-360);
+  delay(time);
+}
+
+void Right (int time){
+  prizm.setMotorSpeeds(-360,360);
+  delay(time);
+}
+
+void Backward (int time){
+  prizm.setMotorSpeeds(-360,-360);
+  delay(time);
+}
+
+void Stop (int time){
+  prizm.setMotorSpeeds(0,0);
+  delay(time);
+}
+
+void CurveRight () {
+  prizm.setMotorSpeeds(400,500);
+}
+
+void CurveLeft () {
+  prizm.setMotorSpeeds(500,400);
+}
+
+void Bounce (int time) {
+  prizm.setMotorSpeeds(-360,360);
+  delay(time);
+}
+
+void Black (){ 
+  prizm.setGreenLED(HIGH);
+  prizm.setRedLED(LOW);
+}
+
+void White () {
+  prizm.setRedLED(HIGH);
+  prizm.setGreenLED(LOW);
+}
