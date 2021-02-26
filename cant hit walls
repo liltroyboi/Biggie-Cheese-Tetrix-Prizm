@@ -8,15 +8,15 @@ prizm.PrizmBegin();
 }
 
 void loop() {
-  distance = prizm.readSonicSensorCM(5);
+  distance = prizm.readSonicSensorCM(5);  //will make the robot not let it pass 75cm in frontof robot
     if(distance <75) {
      DangerZone();
       
 }
-    else if (distance <75 & distance >150){
+    else if (distance <75 & distance >150){   
     MoveMotor();
 }
-    else {
+    else {                              //what the robot will do if it has a clear path
     prizm.setMotorPowers(50,-50);
     delay(400);
     prizm.setMotorPowers(0,0);
@@ -24,18 +24,18 @@ void loop() {
 }
 
 
-void DangerZone() {
+void DangerZone() {                 //will make the robot turn right away from danger
   prizm.setMotorPowers(50,50);
   delay(400);
   prizm.setMotorPowers(50,-50);
 }
 
-void MoveMotor() {
+void MoveMotor() {                  //will move the robot
   prizm.setMotorPowers(50,50);
   delay(1000);
 }
 
-void StopMotors() {
+void StopMotors() {                 //stop robot
   prizm.setMotorPowers(0,0);
   delay(1000);
 }
