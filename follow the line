@@ -1,0 +1,74 @@
+#include <PRIZM.h>           //get the libairy
+  PRIZM prizm; 
+      
+
+void setup() {        
+   prizm.PrizmBegin();
+   prizm.setMotorInvert(2,1);         //swiches the motor backwards
+}
+
+void loop() {          
+
+     if(prizm.readLineSensor(4) == HIGH) {    //when it hits the black line
+    White();
+    CurveRight();    
+}  
+
+  if(prizm.readLineSensor(4) == LOW) {     //when the robots see white
+    Black();
+    CurveLeft(); 
+}
+  delay(30);
+  
+  
+}
+
+
+
+
+
+
+
+
+void Forward (int time){             //make the robot move forward
+  prizm.setMotorSpeeds(360,360);
+  delay(time);
+}
+
+void Left (int time){                //make the roboy move left
+  prizm.setMotorSpeeds(360,-360);
+  delay(time);
+}
+
+void Right (int time){               //makes the robot move right
+  prizm.setMotorSpeeds(-360,360);
+  delay(time);
+}
+
+void Backward (int time){            //makes the robot move backwards
+  prizm.setMotorSpeeds(-360,-360);
+  delay(time);
+}
+
+void Stop (int time){         //will stop the robot
+  prizm.setMotorSpeeds(0,0);
+  delay(time);
+}
+
+void CurveRight () {                 //will make the robot curve fast to the right
+  prizm.setMotorSpeeds(400,500);
+}
+
+void CurveLeft () {                //will make the robot curve fast to the left
+  prizm.setMotorSpeeds(500,400);
+}
+
+void Black (){                    //will get green led when robot sees black line              
+  prizm.setGreenLED(HIGH);
+  prizm.setRedLED(LOW);
+}
+
+void White () {                //will get red led  when sees the white
+  prizm.setRedLED(HIGH);
+  prizm.setGreenLED(LOW);
+}
