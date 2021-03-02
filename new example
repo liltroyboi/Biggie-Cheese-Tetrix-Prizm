@@ -1,0 +1,39 @@
+#include <TELEOP.H>
+#include <PRIZM.h>
+
+PRIZM prizm;        
+PS4 ps4;
+ 
+void setup() { 
+  prizm.PrizmBegin();
+  prizm.setServoPosition(5,10); //set servo ON PORT 5 to 10 deg
+}
+void loop() {
+  ps4.getPS4  
+   if(ps4.Connected){
+   Drive();
+   Pincher();
+  }
+} //Close loop
+
+void Drive (){
+  int rawSpeed = ps4.Touchpad(TOUCHX);
+  int mappedMaxSpeed = map(rawSpeed, 0, 1929, 0, 720);
+  int joyStickL = ps4.Stick(LY); //0-255 returned  
+  int mappedjoyStickL = map(joyStick,0,255,0, mappedMaxSpeed);
+  int joyStickR = ps4.Stick(LY); //0-255 returned 
+  int mappedjoyStickR = map(joyStick,0,255,0, mappedMaxSpeed);  
+  prizm.setMotorSpeeds(mappedjoyStickL,mappedjoyStickR);
+} 
+
+
+
+void Pincher (){
+   if(ps4.Button(L1)){
+     prizm.setServoPosition(5,0); //open 
+    }
+   if(ps4.Button(R1)){
+    prizm.setServoPosition(5,36); //close
+   }
+}
+
