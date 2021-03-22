@@ -1,0 +1,63 @@
+#include <TELEOP.h>   
+#include <PRIZM.h> 
+#include <Wire.h>
+#include "rgb_lcd.h"   
+
+PRIZM prizm;       
+PS4 ps4;             
+rgb_lcd lcd;
+
+int PowerM1;       
+int PowerM2;
+
+const int colorR = 225;
+const int colorG = 100;
+const int colorB = 160;
+int Voltage = prizm.readBatteryVoltage();
+void setup() {
+ prizm.PrizmBegin();          
+  ps4.setDeadZone (LEFT,10);   
+  ps4.setDeadZone(RIGHT,10); 
+  
+    lcd.begin(16, 2);
+
+    lcd.setRGB(colorR, colorG, colorB);
+
+    lcd.print(Voltage);
+    delay(100);   
+}
+void loop() { 
+  ps4.getPS4();                             
+if(ps4.Connected){                         
+      PowerM1 = ps4.Motor(RY);     
+      PowerM2 = ps4.Motor(LY);           
+      prizm.setMotorPowers(PowerM1,PowerM2); 
+}
+  else{                                      
+      prizm.setMotorPowers(0,0);
+  }
+  if(ps4.Connected){                           
+      Front();
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+void Front () {
+        if(ps4.Button(UP)==1){prizm.setServoPosition(1,60);}
+         if(ps4.Button(DOWN)==1){prizm.setServoPosition(1,170);}
+          if(ps4.Button(LEFT)==1){prizm.setServoPosition(1,10);}
+           if(ps4.Button(RIGHT)==1){prizm.setServoPosition(2,90);}
+            if(ps4.Button(CROSS)==1){prizm.setServoPosition(2,90);}
+             if(ps4.Button(SQUARE)==1){prizm.setServoPosition(2,45);}
+              if(ps4.Button(CIRCLE)==1){prizm.setServoPosition(2,135);}
+}
+              
